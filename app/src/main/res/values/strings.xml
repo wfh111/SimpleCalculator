@@ -15,4 +15,6 @@
     <string name="multiplication">*</string>
     <string name="division">/</string>
     <string name="equal">=</string>
+    <string name="pos_neg">+/-</string>
+    <string name="clear">clear</string>
 </resources>
