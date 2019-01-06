@@ -66,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
             total += Double.valueOf(currentValue);
         }
         currentValue = "";
+        positive = true;
         displayBox.setText(operand);
     }
 
@@ -83,6 +84,11 @@ public class MainActivity extends AppCompatActivity {
             case "/":
                 total /= Double.valueOf(currentValue);
                 break;
+            default:
+                if(currentValue.equals("")){
+                    break;
+                }
+                total = Double.valueOf(currentValue);
         }
         displayBox.setText(Double.toString(total));
         currentValue = "";
@@ -92,7 +98,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void changeSign(View view) {
-        if(positive) {
+        if(end) {
+            currentValue = Double.toString(total);
+            if(currentValue.charAt(0) == '-') {
+                currentValue = currentValue.substring(1);
+                displayBox.setText(currentValue);
+            } else {
+                currentValue = "-" + currentValue;
+            }
+            total = Double.valueOf(currentValue);
+            displayBox.setText(currentValue);
+        }
+        else if(positive) {
             positive = false;
             currentValue = "-" + currentValue;
             displayBox.setText(currentValue);
