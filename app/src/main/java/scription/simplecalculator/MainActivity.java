@@ -15,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
     private String currentValue;
     private boolean firstValue;
     private boolean end;
+    boolean alreadyDecimal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
         currentValue = "";
         firstValue = true;
         end = false;
+        alreadyDecimal = false;
     }
 
     public void addValue(View view) {
@@ -37,6 +39,12 @@ public class MainActivity extends AppCompatActivity {
         }
         Button b = (Button) view;
         String buttonText = b.getText().toString();
+        if(buttonText.equals(".") && alreadyDecimal) {
+            return;
+        }
+        else if(buttonText.equals(".")) {
+            alreadyDecimal = true;
+        }
         currentValue += buttonText;
         displayBox.setText(currentValue);
     }
@@ -47,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         if(end) {
             end = false;
         }
-        else if(!currentValue.equals("") && !firstValue) {
+        else if((!currentValue.equals("") && !currentValue.equals(".")) && !firstValue) {
             switch (operand) {
                 case "+":
                     total += Double.valueOf(currentValue);
@@ -62,11 +70,16 @@ public class MainActivity extends AppCompatActivity {
                     total /= Double.valueOf(currentValue);
                     break;
             }
-        } else {
+        } else if((!currentValue.equals("") && !currentValue.equals(".")) && firstValue) {
             total += Double.valueOf(currentValue);
+            firstValue = false;
+        } else {
+            operand = "";
+            return;
         }
         currentValue = "";
         positive = true;
+        alreadyDecimal = false;
         displayBox.setText(operand);
     }
 
@@ -94,6 +107,7 @@ public class MainActivity extends AppCompatActivity {
         currentValue = "";
         operand = "";
         positive = true;
+        alreadyDecimal = false;
         end = true;
     }
 
@@ -130,12 +144,36 @@ public class MainActivity extends AppCompatActivity {
         displayBox.setText("0");
         firstValue = true;
         end = false;
+        alreadyDecimal = false;
     }
 
     public void backspace(View view) {
-        if(!currentValue.equals("")) {
+        if(!currentValue.equals("") && !end) {
             int length = currentValue.length();
             currentValue = currentValue.substring(0,length - 1);
+            displayBox.setText(currentValue);
+        }
+    }
+
+    public void squareRoot(View view) {
+        if(!currentValue.equals("") && !end) {
+            double value = Double.valueOf(currentValue);
+            value = Math.sqrt(value);
+            currentValue = Double.toString(value);
+            displayBox.setText(currentValue);
+
+        }
+        else if (end) {
+            total = Math.sqrt(total);
+            displayBox.setText(Double.toString(total));
+        }
+    }
+
+    public void percent(View view) {
+        if(!currentValue.equals("") && !end) {
+            double percentage = Double.valueOf(currentValue);
+            percentage = total * (percentage / 100);
+            currentValue = Double.toString(percentage);
             displayBox.setText(currentValue);
         }
     }

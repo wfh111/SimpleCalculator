@@ -18,4 +18,7 @@
     <string name="pos_neg">+/-</string>
     <string name="clear">clear</string>
     <string name="backspace"><![CDATA[<--]]></string>
+    <string name="sqrt">sqrt</string>
+    <string name="decimal">.</string>
+    <string name="percent">%</string>
 </resources>
