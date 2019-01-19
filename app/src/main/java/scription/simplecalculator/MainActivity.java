@@ -131,4 +131,12 @@ public class MainActivity extends AppCompatActivity {
         firstValue = true;
         end = false;
     }
+
+    public void backspace(View view) {
+        if(!currentValue.equals("")) {
+            int length = currentValue.length();
+            currentValue = currentValue.substring(0,length - 1);
+            displayBox.setText(currentValue);
+        }
+    }
 }

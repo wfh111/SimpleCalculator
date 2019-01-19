@@ -62,6 +62,25 @@
         app:layout_constraintVertical_bias="0.872" />
 
     <Button
+        android:id="@+id/backspaceButton"
+        android:layout_width="46dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="16dp"
+        android:background="@color/purple"
+        android:onClick="backspace"
+        android:text="@string/backspace"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@+id/equalButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.928"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.732" />
+
+    <Button
         android:id="@+id/multiplyButton"
         android:layout_width="46dp"
         android:layout_height="38dp"
