@@ -32,17 +32,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void addValue(View view) {
-        if(end) {
+        if (end) {
             end = false;
             firstValue = true;
             total = 0;
         }
         Button b = (Button) view;
         String buttonText = b.getText().toString();
-        if(buttonText.equals(".") && alreadyDecimal) {
+        if (buttonText.equals(".") && alreadyDecimal) {
             return;
         }
-        else if(buttonText.equals(".")) {
+        else if (buttonText.equals(".")) {
             alreadyDecimal = true;
         }
         currentValue += buttonText;
@@ -52,10 +52,10 @@ public class MainActivity extends AppCompatActivity {
     public void setOperand(View view) {
         Button b = (Button) view;
         operand = b.getText().toString();
-        if(end) {
+        if (end) {
             end = false;
         }
-        else if((!currentValue.equals("") && !currentValue.equals(".")) && !firstValue) {
+        else if ((!currentValue.equals("") && !currentValue.equals(".")) && !firstValue) {
             switch (operand) {
                 case "+":
                     total += Double.valueOf(currentValue);
@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
                     total /= Double.valueOf(currentValue);
                     break;
             }
-        } else if((!currentValue.equals("") && !currentValue.equals(".")) && firstValue) {
+        } else if ((!currentValue.equals("") && !currentValue.equals(".")) && firstValue) {
             total += Double.valueOf(currentValue);
             firstValue = false;
         } else {
@@ -112,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void changeSign(View view) {
-        if(end) {
+        if (end) {
             currentValue = Double.toString(total);
             if(currentValue.charAt(0) == '-') {
                 currentValue = currentValue.substring(1);
@@ -123,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
             total = Double.valueOf(currentValue);
             displayBox.setText(currentValue);
         }
-        else if(positive) {
+        else if (positive) {
             positive = false;
             currentValue = "-" + currentValue;
             displayBox.setText(currentValue);
@@ -148,7 +148,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void backspace(View view) {
-        if(!currentValue.equals("") && !end) {
+        if (!currentValue.equals("") && !end) {
             int length = currentValue.length();
             currentValue = currentValue.substring(0,length - 1);
             displayBox.setText(currentValue);
@@ -156,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void squareRoot(View view) {
-        if(!currentValue.equals("") && !end) {
+        if (!currentValue.equals("") && !end) {
             double value = Double.valueOf(currentValue);
             value = Math.sqrt(value);
             currentValue = Double.toString(value);
@@ -170,10 +170,31 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void percent(View view) {
-        if(!currentValue.equals("") && !end) {
+        if (!currentValue.equals("") && !end) {
             double percentage = Double.valueOf(currentValue);
             percentage = total * (percentage / 100);
             currentValue = Double.toString(percentage);
+            displayBox.setText(currentValue);
+        }
+    }
+
+    public void angles(View view) {
+        Button b = (Button) view;
+        String txt = b.getText().toString();
+        if (!currentValue.equals("")) {
+            double value = Double.valueOf(currentValue);
+            switch (txt) {
+                case "sin":
+                    value = Math.sin(value);
+                    break;
+                case "cos":
+                    value = Math.cos(value);
+                    break;
+                case "tan":
+                    value = Math.tan(value);
+                    break;
+            }
+            currentValue = Double.toString(value);
             displayBox.setText(currentValue);
         }
     }
